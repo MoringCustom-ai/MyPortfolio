@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Oswald', sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .left-section {
+            background: #a8a4ff;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .avatar.animated {
+            animation: rotate 2s linear infinite;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            animation: wave 1.5s infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .close-btn {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .close-btn:hover {
+            background: #ff521f;
+            transform: scale(1.05);
+        }
+
+        .phone {
+            color: #333;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .right-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            flex: 2;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .tabs {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+            margin: 0 0 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            color: #666;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .tab.active {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #a8a4ff;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .info {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #f8f8f8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Левая секция -->
+        <div class="left-section">
+            <div class="avatar-container">
+                <img src="https://via.placeholder.com/150" alt="Аватар" class="avatar">
+                <div class="wave"></div>
+            </div>
+            <h2>СЕРГЕЕВ ИВАН ПЕТРОВИЧ</h2>
+            <button class="close-btn">ЗАКРЫТЬ ОКНО</button>
+            <p class="phone">ЗВОНОК НА +7 919 217 00 11</p>
+        </div>
+
+        <!-- Правая секция -->
+        <div class="right-section">
+            <ul class="tabs">
+                <li class="tab active" data-target="#profile">ПРОФИЛЬ</li>
+                <li class="tab" data-target="#additional">ДОПОЛНИТЕЛЬНО</li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="profile" class="content active">
+                    <div class="info">
+                        <span>Имя</span>
+                        <span>Сергеев</span>
+                    </div>
+                    <div class="info">
+                        <span>Фамилия</span>
+                        <span>Иван</span>
+                    </div>
+                    <div class="info">
+                        <span>Отчество</span>
+                        <span>Петрович</span>
+                    </div>
+                </div>
+
+                <div id="additional" class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Q1</th>
+                                <th>Q2</th>
+                                <th>Q3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Apple</td><td>12</td><td>13</td><td>16</td></tr>
+                            <tr><td>Google</td><td>8</td><td>15</td><td>14</td></tr>
+                            <tr><td>Meta</td><td>10</td><td>11</td><td>9</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Анимация аватара
+            $('.avatar').hover(
+                function() { $(this).addClass('animated'); },
+                function() { $(this).removeClass('animated'); }
+            );
+
+            // Переключение вкладок
+            $('.tab').click(function() {
+                const target = $(this).data('target');
+                $('.tab').removeClass('active');
+                $(this).addClass('active');
+                $('.content').removeClass('active');
+                $(target).addClass('active');
+            });
+
+            // Кнопка закрытия
+            $('.close-btn').click(function() {
+                $('.container').fadeOut(500, function() {
+                    $(this).remove();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
